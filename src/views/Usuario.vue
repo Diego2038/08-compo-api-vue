@@ -15,8 +15,8 @@
     </ul>
   </div>
 
-  <button @click="disminuirPage">Atrás</button>
-    <button @click="aumentarPage">Adelante</button>
+  <button @click="disminuirPage ">Atrás</button>
+    <button @click="aumentarPage ">Adelante</button>
     <span>Página {{ currentPage }}</span>
 
 </template>
@@ -29,12 +29,29 @@ export default {
 
   setup(){
 
-    const users = ref([])
-    const isLoading = ref(false)
     const currentPage = ref(1)
     const errorMessage = ref(null)
+    const isLoading = ref(false)
+    const users = ref([])
     
-    const requestApi = async (page = 1) => {
+    const aumentarPage = fAumentarPage // son eventos
+    const disminuirPage = fDisminuirPage // son eventos
+    const requestApi = fRequestApi()
+
+    requestApi
+
+    return{
+      currentPage,
+      errorMessage,
+      isLoading,
+      users,
+      
+      aumentarPage,
+      disminuirPage,
+    }
+
+
+    async function fRequestApi (page = 1) {
       
       if (page <= 0 ) page = 1
       
@@ -60,32 +77,21 @@ export default {
  
     }
 
-    const disminuirPage = () => {
+    function fDisminuirPage () {
       if( currentPage.value < 1 ) {
         currentPage.value = 1
       } else {
         currentPage.value --
       }
 
-      requestApi( currentPage.value )
+      fRequestApi( currentPage.value )
     }
 
-    const aumentarPage = () => {
+    function fAumentarPage () {
       currentPage.value++
-      requestApi( currentPage.value )
+      fRequestApi( currentPage.value )
     }
 
-    requestApi()
-
-    return{
-      currentPage,
-      errorMessage,
-      isLoading,
-      users,
-      
-      aumentarPage,
-      disminuirPage,
-    }
   }
 }
 </script>
