@@ -8,29 +8,20 @@
 
 <script> 
 // Nota: Los composables también son conocidos como los hooks en React (?)
-import { ref } from 'vue'
+import useCounter from "@/composables/useCounter";
 export default {
   name: 'Counter',
   props:{},
   emits:[],
   setup(){
-    const counter = ref(6)
+     const {counter, counterMasUno, counterMenosUno} = useCounter(777)
 
-    // const counterMasUno = () => {
-    //   counter.value++
-    // }
-    
-    // const counterMenosUno = () => {
-    //   counter.value--
-    // }
-
-    return {
+     return {
       counter,
 
-      // Sólo es necesario exportar la función si se utiliza internamente en el setup
-      counterMasUno: () => counter.value++ ,
-      counterMenosUno: () => counter.value--,
-    }
+      counterMasUno,
+      counterMenosUno
+     }
   }
 }
 </script>
