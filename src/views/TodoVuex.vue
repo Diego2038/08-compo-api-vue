@@ -50,30 +50,36 @@
 
 </template>
 
-<script>
-import { useStore } from 'vuex';
-import { ref, computed, onActivated } from 'vue';
+<script> 
+import useTodos from "../composables/useTodos";
 
 export default {
   setup(){
-
-    const store = useStore()
-
-    const currentTab = ref('all')
-
-    return {
-      // data
+ 
+    const {
       currentTab,
-      todos: store.state.todos,
+      todos ,
 
       // data getters
-      tareasPendientes: computed( () => store.getters.tareasPendientes),
-      tareasTotal: computed( () => store.getters['allTodos']),
-      tareasCompletadas: computed( () => store.getters['completedTodos']),
-      filtroxd: computed( () => store.getters['filtrarTodos']( currentTab.value )),
+      tareasPendientes ,
+      tareasTotal ,
+      tareasCompletadas ,
+      filtroxd ,
       
       // Methods
-      cambiarEstado : (id) => store.commit('modificarCompleted', {id}), 
+      cambiarEstado ,
+
+    } = useTodos()
+     
+
+    return {
+      currentTab,
+      todos,  
+      tareasPendientes,
+      tareasTotal,
+      tareasCompletadas,
+      filtroxd, 
+      cambiarEstado , 
 
     }
   }
