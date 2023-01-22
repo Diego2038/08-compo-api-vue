@@ -7,12 +7,13 @@ const usePokemons =  (pokemonId = '1') => {
   const errorMessage = ref();
   const isLoading = ref(false);
 
-  const getPokemon = async () => {
+  const getPokemon = async ( id) => {
+    if (id == null) return 
     isLoading.value = true;
     pokemon.value = null;
     
     try{
-      const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ pokemonId }`);
+      const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ id }`);
       pokemon.value = data;
       isLoading.value = false;
     }catch( err ){
@@ -21,14 +22,16 @@ const usePokemons =  (pokemonId = '1') => {
   }
 
 
-  getPokemon();
+  getPokemon( pokemonId);
 
 
 
   return {
     pokemon,
     errorMessage,
-    isLoading
+    isLoading,
+
+    getPokemon
   }
 
 }

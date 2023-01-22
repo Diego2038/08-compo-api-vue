@@ -16,7 +16,8 @@
 
 <script>
 import usePokemons from "../composables/usePokemons";
-import { useRoute } from "vue-router";
+import { onBeforeRouteLeave, useRoute } from "vue-router";
+import { watch } from 'vue';
 export default {
 
   name:'Pokemon',
@@ -25,7 +26,24 @@ export default {
 
     const route = useRoute() 
 
-    const { pokemon, isLoading, errorMessage } = usePokemons( route.params.id)
+    const { pokemon, isLoading, errorMessage, getPokemon } = usePokemons( route.params.id)
+
+    // watch( route.params.id, (value, previousValue) => {
+    //   console.log(value, previousValue)
+    // }) // sólo sirve con ref que no sean getters setters
+
+    watch( () => route.params.id, 
+    (value, prevVal) => console.log(value, prevVal))
+
+    watch( () => route.params.id,
+      (   ) => getPokemon( route.params.id ))
+    
+    onBeforeRouteLeave( () => {
+      const answer = window.confirm('¿Desea salir de aquí?')
+      return answer
+    })
+
+    
 
     return { pokemon, isLoading, errorMessage }
   }

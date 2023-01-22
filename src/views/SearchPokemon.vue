@@ -27,11 +27,11 @@ export default {
     const idPokemon = ref(1)
     const txtSearchId = ref() // Para utilizar en referencia en alguna parte de la plantilla html
      
-    console.log(txtSearchId.value)
+    // console.log(txtSearchId.value)
     onActivated( () => {
       // txtSearchId.value.focus()
       txtSearchId.value.select() 
-      console.log(txtSearchId.value)
+      // console.log(txtSearchId.value)
     })
 
     return{
