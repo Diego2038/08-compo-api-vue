@@ -37,6 +37,14 @@ export default createStore({
     } 
   },
   mutations: {
+    // modificarCompleted: (state, {id}) => { // También se puede escribir, puede ser una función o un atributo del objeto
+    modificarCompleted(state, {id}){ 
+
+      const index = state.todos.findIndex( t => t.id === id );  
+      
+      state.todos[index].completed = !state.todos[index].completed ; 
+    } 
+
   },
   actions: {
   },

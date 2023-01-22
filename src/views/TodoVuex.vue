@@ -34,12 +34,15 @@
     @click="currentTab = 'completed'">
   Completados
   </button>
-  
+ 
+
   <div>
     <ul>
       <li v-for="tarea in filtroxd" :key="tarea.id"
-      :class="{ 'completed': tarea.completed}">
-      {{ tarea.text }}
+      :class="{ 'completed': tarea.completed}"
+      @dblclick="cambiarEstado(tarea.id)"
+      >
+      {{ tarea.id }}. {{ tarea.text }} 
       </li>
     </ul>
   </div>
@@ -59,13 +62,19 @@ export default {
     const currentTab = ref('all')
 
     return {
+      // data
       currentTab,
       todos: store.state.todos,
 
+      // data getters
       tareasPendientes: computed( () => store.getters.tareasPendientes),
       tareasTotal: computed( () => store.getters['allTodos']),
       tareasCompletadas: computed( () => store.getters['completedTodos']),
-      filtroxd: computed( () => store.getters['filtrarTodos']( currentTab.value )) 
+      filtroxd: computed( () => store.getters['filtrarTodos']( currentTab.value )),
+      
+      // Methods
+      cambiarEstado : (id) => store.commit('modificarCompleted', {id}), 
+
     }
   }
 }
