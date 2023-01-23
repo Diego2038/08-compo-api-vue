@@ -46,11 +46,11 @@
       <h1>Nueva tarea</h1>
     </template>
     <template v-slot:addTodo>
-      <form @submit.prevent="submitTodo">
-        <input type="text" placeholder="Ingrese Todo" ref="input123">
+      <form @submit.prevent="createTodo(input123); isOpen=false">
+        <input type="text" placeholder="Ingrese Todo" v-model="input123">
         <br>
         <br>
-        <button >Enviar boton</button>
+        <button type="submit" >Enviar boton</button>
       </form>
     </template>
   </modal>
@@ -96,6 +96,7 @@ export default {
       
       // Methods
       cambiarEstado ,
+      createTodo,
 
     } = useTodos()
      
@@ -108,11 +109,7 @@ export default {
       input123,
       isOpen,
       changeIsOpen,
-      submitTodo: ( ) => {
-        changeIsOpen()
-        // console.log('val input', input123.value.value)
-        store.commit('toggleTodo', input123.value.value )
-      },
+      createTodo,
 
       currentTab,
       todos,  

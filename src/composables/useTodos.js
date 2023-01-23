@@ -19,6 +19,7 @@ const useTodos = () => {
     
     // Methods
     cambiarEstado : (id) => store.commit('modificarCompleted', {id}), 
+    createTodo : (text) => store.commit('toggleTodo', text), 
 
   }
 }
