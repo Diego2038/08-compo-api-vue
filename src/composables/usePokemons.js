@@ -14,11 +14,12 @@ const usePokemons =  (pokemonId = '1') => {
     
     try{
       const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ id }`);
-      pokemon.value = data;
-      isLoading.value = false;
+      pokemon.value = data; 
     }catch( err ){
       errorMessage.value = 'Sucedió un error'
-    } 
+    }finally{
+      isLoading.value = false
+    }
   }
 
 
