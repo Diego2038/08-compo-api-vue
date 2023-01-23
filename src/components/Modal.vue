@@ -12,6 +12,9 @@
       <slot name="exposed" :newTitle="newTitle" hola="mundo"></slot>
 
 
+      <slot name="addTodo"> </slot>
+
+
       <!-- <slot class="center"> 
         <div class="center">
           No hay contenido
@@ -31,7 +34,8 @@ export default {
   props:{
     title: {
       type: String,
-      required: true
+      required: false,
+      default: 'aaa'
     }
   },
   setup(props, context){

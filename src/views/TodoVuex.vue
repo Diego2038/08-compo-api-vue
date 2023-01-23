@@ -1,4 +1,5 @@
 <template>
+  <template v-if="false">
   <h1>Lista de tareas de Thanos</h1>
   <h3>Cantidad: {{ $store.state.todos.length }}</h3>
   <ul v-for="todo in todos" :key="todo.text">
@@ -19,6 +20,7 @@
   <h1>Todas las tareas completadas: {{ tareasCompletadas.length }}</h1>
 
   <hr>
+  </template>
   
   <button :class="{ 'active': currentTab === 'all'}"
     @click="currentTab = 'all'">
@@ -34,7 +36,24 @@
     @click="currentTab = 'completed'">
   Completados
   </button>
- 
+
+  <button @click="isOpen = true">Crear Todo</button>
+  
+
+  <modal v-if="isOpen"
+  @onClose="changeIsOpen">
+    <template #headerx>
+      <h1>Nueva tarea</h1>
+    </template>
+    <template v-slot:addTodo>
+      <form @submit.prevent="submitTodo">
+        <input type="text" placeholder="Ingrese Todo" ref="input123">
+        <br>
+        <br>
+        <button >Enviar boton</button>
+      </form>
+    </template>
+  </modal>
 
   <div>
     <ul>
@@ -52,9 +71,18 @@
 
 <script> 
 import useTodos from "../composables/useTodos";
+import Modal from "../components/Modal.vue";
+import { ref } from 'vue';
+import { useStore } from "vuex";
 
 export default {
+  name:'TodoVuex',
+  components:{
+    Modal
+  },
   setup(){
+
+    const store = useStore()
  
     const {
       currentTab,
@@ -71,8 +99,21 @@ export default {
 
     } = useTodos()
      
+    const isOpen = ref(false)
+    const input123 = ref()
+
+    const changeIsOpen = () =>  isOpen.value = !isOpen.value
 
     return {
+      input123,
+      isOpen,
+      changeIsOpen,
+      submitTodo: ( ) => {
+        changeIsOpen()
+        // console.log('val input', input123.value.value)
+        store.commit('toggleTodo', input123.value.value )
+      },
+
       currentTab,
       todos,  
       tareasPendientes,
