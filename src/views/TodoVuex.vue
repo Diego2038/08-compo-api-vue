@@ -1,5 +1,5 @@
 <template>
-  <template v-if="false">
+  <!-- <template v-if="false">
   <h1>Lista de tareas de Thanos</h1>
   <h3>Cantidad: {{ $store.state.todos.length }}</h3>
   <ul v-for="todo in todos" :key="todo.text">
@@ -20,7 +20,8 @@
   <h1>Todas las tareas completadas: {{ tareasCompletadas.length }}</h1>
 
   <hr>
-  </template>
+  </template> -->
+  <button :class="{ 'cosa' : verdadero, 'otro': verdadero }">xd</button>
   
   <button :class="{ 'active': currentTab === 'all'}"
     @click="currentTab = 'all'">
@@ -82,6 +83,8 @@ export default {
   },
   setup(){
 
+    const falso = ref(false)
+    const verdadero = ref(true)
     const store = useStore()
  
     const {
@@ -106,6 +109,8 @@ export default {
     const changeIsOpen = () =>  isOpen.value = !isOpen.value
 
     return {
+      falso, verdadero,
+
       input123,
       isOpen,
       changeIsOpen,

@@ -5,29 +5,35 @@
   <h6 v-if="errorMessage">{{ errorMessage }}</h6>
 
   <div v-if="!isLoading && !errorMessage">
-    <ul>
-      <li v-for="{ id, first_name, last_name, email, avatar} in users" :key="id">
-        <h3>ID: {{ id }}</h3>
-        <h3>Nombre: {{ first_name }} {{ last_name }}</h3> 
-        <h5>{{ email }}</h5>
-        <img :src=" avatar" :alt="'Persona ' + id">
-      </li>
-    </ul>
+    <user-list :users="users" >
+      <template v-slot="{ esteUsuario }">
+        <h4> {{ esteUsuario.first_name }} {{ esteUsuario.last_name }}</h4> 
+        <h6> {{ esteUsuario.email }}</h6> 
+        <img :src="esteUsuario.avatar" :alt="esteUsuario.id">
+        <hr>
+      </template>
+      
+
+      <template #elNombre="equisde">
+        <h6>El número que se consigue con Scoped slots es: {{ equisde.numeroMagico }}</h6>
+      </template>
+    </user-list>
+    
   </div>
 
   <button @click="disminuirPage ">Atrás</button>
     <button @click="aumentarPage ">Adelante</button>
     <span>Página {{ currentPage }}</span>
+    
 
 </template>
 
-<script>
-import { ref } from 'vue'
-import axios from 'axios'
+<script> 
 import useUsers from "../composables/useUsers";
+import UserList from "@/components/UserList.vue";
 export default {
   name: 'Usuario',
-
+  components: { UserList },
   setup(){
 
     const { currentPage, errorMessage, isLoading, users, aumentarPage, disminuirPage } = useUsers()

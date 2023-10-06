@@ -9,7 +9,12 @@
       <slot name="bodyx"></slot>
       <slot name="footerx"></slot>
 
-      <slot name="exposed" :newTitle="newTitle" hola="mundo"></slot>
+      
+
+      <div class="bonito">
+
+        <slot name="exposed" :newTitle="newTitle" hola="mundo"></slot>
+      </div>
 
 
       <slot name="addTodo"> </slot>
@@ -50,6 +55,10 @@ export default {
 </script>
 
 <style scoped>
+
+.bonito {
+  color: aqua;
+}
 .modal-background {
     position: fixed;
     top: 0;

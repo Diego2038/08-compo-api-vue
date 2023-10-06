@@ -2,14 +2,17 @@ import { createStore } from 'vuex'
 import { v4 as uuidv4 } from 'uuid'
 
 export default createStore({
-  state: {
-    todos : [
-      { id: '1', text: 'Recolectar las piedras del infinito', completed: false },
-      { id: '2', text: 'Recolectar las piedra de la sabiduría', completed: true },
-      { id: '3', text: 'Recolectar las piedra del amor', completed: true },
-      { id: '4', text: 'Recolectar las piedra del dinero', completed: false },
-      { id: '5', text: 'Conseguir chamba', completed: false },
-    ]
+  state() {
+    return{
+      
+      todos : [
+        { id: '1', text: 'Recolectar las piedras del infinito', completed: false },
+        { id: '2', text: 'Recolectar las piedra de la sabiduría', completed: true },
+        { id: '3', text: 'Recolectar las piedra del amor', completed: true },
+        { id: '4', text: 'Recolectar las piedra del dinero', completed: false },
+        { id: '5', text: 'Conseguir chamba', completed: false },
+      ]
+    }
   },
   getters: {
     tareasPendientes(state, getters, rootState){
@@ -21,7 +24,7 @@ export default createStore({
       // getters para acceder a los getters del módulo
       // rootState para acceder al state global (muy útil para los módulos)
       // console.log({state, getters, rootState})
-      return state.todos; // Se realiza la desestructuración para que no pueda modificarse directamente desde el getter
+      return [...state.todos]; // Se realiza la desestructuración para que no pueda modificarse directamente desde el getter
     },
 
     completedTodos( state ){

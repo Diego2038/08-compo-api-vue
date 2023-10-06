@@ -15,8 +15,8 @@
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo ullam ipsum distinctio repellendus vero. </p>
     </template>
 
-    <template v-slot:exposed="{newTitle}"> <!-- Ponle cualquier nombre, sacará todos los elementos que hayan estado definidos en el slot del componente-->
-      <h1>{{ newTitle }}</h1>
+    <template v-slot:exposed="{newTitle}"> <!-- Ponle cualquier nombre, sacará todos los elementos que hayan estado definidos en el slot del componente, al menos que lo desestructures-->
+      <h1>🐱‍🐉🐱‍🐉🐱‍🐉 {{ newTitle }}</h1>
       <h6></h6>
     </template>
 

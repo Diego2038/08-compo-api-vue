@@ -15,7 +15,7 @@ const useTodos = () => {
     tareasPendientes: computed( () => store.getters.tareasPendientes),
     tareasTotal: computed( () => store.getters['allTodos']),
     tareasCompletadas: computed( () => store.getters['completedTodos']),
-    filtroxd: computed( () => store.getters['filtrarTodos']( currentTab.value )),
+    filtroxd: computed( () => store.getters['filtrarTodos']( currentTab.value )), // TODO: Un computed con parámetro 😭
     
     // Methods
     cambiarEstado : (id) => store.commit('modificarCompleted', {id}), 
